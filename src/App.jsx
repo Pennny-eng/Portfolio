@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Moon, Sun, Github, Linkedin, Mail, Code, Briefcase, User, MessageCircle } from 'lucide-react';
 
 export default function App() {
- 
+  const [darkMode, setDarkMode] = useState(false);
+  const [visibleSections, setVisibleSections] = useState(new Set());
+
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [formData, setFormData] = useState({
     name: '',
@@ -19,7 +22,24 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => new Set([...prev, entry.target.id]));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
+    document.querySelectorAll('[data-animate]').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -27,6 +47,7 @@ export default function App() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+ const toggleDarkMode = () => setDarkMode(!darkMode);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -75,16 +96,35 @@ export default function App() {
       setIsSubmitting(false);
     }
   };
+   const whatsappNumber = "2348144663199";
+  const whatsappMessage = "Hello! I'm interested in discussing a project with you.";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   return (
      
 
-   <div className="font-sans text-gray-800 scroll-smooth">
-  
+   <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+  <button
+        onClick={toggleDarkMode}
+        className={`fixed top-8 right-6 z-50 p-3 rounded-full shadow-lg transition-all duration-300 ${
+          darkMode ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300' : 'bg-gray-800 text-yellow-400 hover:bg-gray-700'
+        }`}
+      >
+        {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+      </button>
+       <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 animate-pulse"
+      >
+        <MessageCircle size={28} />
+      </a>
   <section
-    id="home"
-    className="relative h-screen bg-cover bg-center text-white flex flex-col"
+    id="home" className="relative h-screen bg-cover bg-center text-white flex flex-col"
     style={{ backgroundImage: "url('/Image/IMG_3553 (1).jpeg')" }}
   >
+
+  
    
     <div className="absolute inset-0 bg-black/60"></div>
 
@@ -264,182 +304,179 @@ export default function App() {
 
 
       {/* About Me*/}
-     <section id="about" className="bg-gray-50 py-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+     <section  id="about" 
+        data-animate
+        className={`py-20 transition-all duration-700 ${
+          visibleSections.has('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
+        style={{ transitionDelay: '200ms' }}
+      >
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="flex justify-center md:justify-start">
+              <img
+                src="/Image/IMG_3553 (1).jpeg"
+                alt="Your Name"
+                className="w-64 h-64 rounded-xl shadow-lg object-cover"
+              />
+            </div>
 
-          
-          <div className="flex justify-center md:justify-start">
-            <img
-              src="/Image/IMG_3553 (1).jpeg"
-              alt="Your Name"
-              className="w-64 h-64 rounded-xl shadow-lg object-cover"
-            />
-          </div>
+            <div>
+              <h2 className={`text-3xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                About Me
+              </h2>
+              <p className={`mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Hi! I'm <span className="font-semibold">Mukaila Ibrahim Damilare (<span className="text-blue-600 font-poppins">Penny</span>)</span>, a passionate Frontend and WordPress Designer. I specialize in creating modern, responsive, and user-friendly websites that help businesses stand out online.
+              </p>
+              <p className={`mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                With experience in <span className="font-semibold">React, Tailwind CSS, HTML, CSS, JavaScript</span>, and <span className="font-semibold">WordPress themes & plugins</span>, I bring creative ideas to life while focusing on performance and usability.
+              </p>
+              <p className={`mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                I love turning complex problems into simple, intuitive designs. Whether it's building a custom WordPress site or developing a sleek frontend application, I aim to deliver quality work that exceeds expectations.
+              </p>
 
-         
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              About Me
-            </h2>
-            <p className="text-gray-600 mb-4">
-              Hi! I’m <span className="font-semibold">Mukaila Ibrahim Damilare (<span className="text-blue-600 font-poppins">Penny</span>)</span>, a passionate Frontend and WordPress Designer. I specialize in creating modern, responsive, and user-friendly websites that help businesses stand out online.
-            </p>
-            <p className="text-gray-600 mb-4">
-              With experience in <span className="font-semibold">React, Tailwind CSS, HTML, CSS, JavaScript</span>, and <span className="font-semibold">WordPress themes & plugins</span>, I bring creative ideas to life while focusing on performance and usability.
-            </p>
-            <p className="text-gray-600 mb-6">
-              I love turning complex problems into simple, intuitive designs. Whether it’s building a custom WordPress site or developing a sleek frontend application, I aim to deliver quality work that exceeds expectations.
-            </p>
-
-            <a
-              href="#contact"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300"
-            >
-              Get in Touch
-            </a>
-             <a
-              href="https://www.freecodecamp.org/certification/fcc00d2a7dd-0baf-48b8-ac59-8e9ec6355546/javascript-algorithms-and-data-structures-v8"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 gap-4 ml-4"
-            >
-              Check Certificate
-            </a>
+              <a
+                href="#contact"
+                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300"
+              >
+                Get in Touch
+              </a>
+              <a
+                href="https://www.freecodecamp.org/certification/fcc00d2a7dd-0baf-48b8-ac59-8e9ec6355546/javascript-algorithms-and-data-structures-v8"
+                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 gap-4 ml-4"
+              >
+                Check Certificate
+              </a>
+            </div>
           </div>
         </div>
-      </div>
     </section>
-          <section id="services" className="py-20 px-4 bg-white">
+          <section   id="services" 
+        data-animate
+        className={`py-20 px-4 transition-all duration-700 ${
+          visibleSections.has('services') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } ${darkMode ? 'bg-gray-900' : 'bg-white'}`}
+        style={{ transitionDelay: '300ms' }}
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 mb-3">My Services</h2>
-            <h2 className="text-4xl text-gray-800 mb-3">Why Choose My Services</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
+            <h2 className={`text-3xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>My Services</h2>
+            <h2 className={`text-4xl mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Why Choose My Services</h2>
+            <p className={`max-w-2xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               I bring a diverse skill set to deliver high-quality web solutions tailored to your needs
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div className="skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2">
+            <div className={`skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white'}`}>
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 transform hover:rotate-12 transition-transform duration-300">
-              
                 <span className="text-2xl font-bold text-blue-600">JS</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">JavaScript</h3>
-              <p className="text-gray-600 text-sm mb-6">
+              <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>JavaScript</h3>
+              <p className={`text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 Expert in modern ES6+ features, DOM manipulation, and async programming for dynamic web experiences
               </p>
               <div className="mb-2">
                 <div className="flex justify-between mb-2 px-2">
-                  <span className="text-sm font-medium text-gray-700">Proficiency</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Proficiency</span>
                   <span className="text-sm font-bold text-blue-600">95%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className={`w-full rounded-full h-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="bg-blue-600 h-2 rounded-full transition-all duration-1000" style={{ width: '95%' }}></div>
                 </div>
               </div>
             </div>
 
-           
-          <div className="skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2">
+            <div className={`skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white'}`}>
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 transform hover:rotate-12 transition-transform duration-300">
-              
-                <span className="text-2xl font-bold text-orange-600">{'<>'}</span>
+                <span className="text-2xl font-bold text-orange-600">&lt;&gt;</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">HTML</h3>
-              <p className="text-gray-600 text-sm mb-6">
+              <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>HTML</h3>
+              <p className={`text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 Semantic markup, accessibility standards, and modern HTML5 features for well-structured websites
               </p>
               <div className="mb-2">
                 <div className="flex justify-between mb-2 px-2">
-                  <span className="text-sm font-medium text-gray-700">Proficiency</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Proficiency</span>
                   <span className="text-sm font-bold text-blue-600">90%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className={`w-full rounded-full h-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="bg-blue-600 h-2 rounded-full transition-all duration-1000" style={{ width: '90%' }}></div>
                 </div>
               </div>
             </div>
 
-            
-            <div className="skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2">
+            <div className={`skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white'}`}>
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 transform hover:rotate-12 transition-transform duration-300">
-              
-                <span className="text-2xl font-bold text-purple-600">{'{}'}</span>
+                <span className="text-2xl font-bold text-purple-600">&#123;&#125;</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">CSS</h3>
-              <p className="text-gray-600 text-sm mb-6">
+              <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>CSS</h3>
+              <p className={`text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 Responsive design, Flexbox, Grid, animations, and modern CSS techniques for beautiful interfaces
               </p>
               <div className="mb-2">
                 <div className="flex justify-between mb-2 px-2">
-                  <span className="text-sm font-medium text-gray-700">Proficiency</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Proficiency</span>
                   <span className="text-sm font-bold text-blue-600">90%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className={`w-full rounded-full h-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="bg-blue-600 h-2 rounded-full transition-all duration-1000" style={{ width: '90%' }}></div>
                 </div>
               </div>
             </div>
 
-            {/* React */}
-            <div className="skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2">
+            <div className={`skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white'}`}>
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 transform hover:rotate-12 transition-transform duration-300">
-              
                 <span className="text-2xl font-bold text-cyan-600">⚛</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">React</h3>
-              <p className="text-gray-600 text-sm mb-6">
+              <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>React</h3>
+              <p className={`text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 Component architecture, hooks, state management, and React ecosystem for modern applications
               </p>
               <div className="mb-2">
                 <div className="flex justify-between mb-2 px-2">
-                  <span className="text-sm font-medium text-gray-700">Proficiency</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Proficiency</span>
                   <span className="text-sm font-bold text-blue-600">60%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className={`w-full rounded-full h-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="bg-blue-600 h-2 rounded-full transition-all duration-1000" style={{ width: '60%' }}></div>
                 </div>
               </div>
             </div>
 
-            {/* WordPress */}
-           <div className="skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2">
+            <div className={`skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white'}`}>
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 transform hover:rotate-12 transition-transform duration-300">
-              
                 <span className="text-2xl font-bold text-blue-700">W</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">WordPress</h3>
-              <p className="text-gray-600 text-sm mb-6">
+              <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>WordPress</h3>
+              <p className={`text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 Theme customization, plugin integration, and content management systems for powerful websites
               </p>
               <div className="mb-2">
                 <div className="flex justify-between mb-2 px-2">
-                  <span className="text-sm font-medium text-gray-700">Proficiency</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Proficiency</span>
                   <span className="text-sm font-bold text-blue-600">70%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className={`w-full rounded-full h-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="bg-blue-600 h-2 rounded-full transition-all duration-1000" style={{ width: '70%' }}></div>
                 </div>
               </div>
             </div>
 
-            {/* Python */}
-            <div className="skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2">
+            <div className={`skill-card text-center p-8 hover:shadow-lg transition-all duration-300 rounded-lg transform hover:-translate-y-2 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white'}`}>
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 transform hover:rotate-12 transition-transform duration-300">
-              
                 <span className="text-2xl font-bold text-yellow-600">Py</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Python</h3>
-              <p className="text-gray-600 text-sm mb-6">
+              <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Python</h3>
+              <p className={`text-sm mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 Basic syntax, scripting, and exploring backend development fundamentals for versatile solutions
               </p>
               <div className="mb-2">
                 <div className="flex justify-between mb-2 px-2">
-                  <span className="text-sm font-medium text-gray-700">Proficiency</span>
+                  <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Proficiency</span>
                   <span className="text-sm font-bold text-blue-600">20%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className={`w-full rounded-full h-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                   <div className="bg-blue-600 h-2 rounded-full transition-all duration-1000" style={{ width: '20%' }}></div>
                 </div>
               </div>
@@ -447,63 +484,69 @@ export default function App() {
           </div>
         </div>
       </section>
-     <section id="projects" className="py-20 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-3">My Projects</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
-              Here are some of my recent works showcasing my skills and creativity
-            </p>
-          </div>
+    {/* Project 6 */}
+           <section id="projects" 
+        data-animate
+        className={`py-20 px-4 transition-all duration-700 ${
+          visibleSections.has('projects') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
+        style={{ transitionDelay: '400ms' }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className={`text-4xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>My Projects</h2>
+            <p className={`max-w-2xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              Here are some of my recent works showcasing my skills and creativity
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project 1 */}
-            <div className="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div 
-  className="h-48 bg-cover bg-center"
-  style={{ backgroundImage: "url('/Image/Screenshot 2025-11-09 135913.png')" }}
-></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">E-Commerce Website</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  A fully responsive online store with shopping cart functionality, product filters, and secure checkout process.
-                </p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">React</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">CSS</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">JavaScript</span>
-                </div>
-<a 
-  href="https://e-cpennys-projectsommerce.vercel.app/" 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="text-blue-600 font-medium hover:text-blue-700"
->
-  View Project →
-</a>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Project 1: E-Commerce Website */}
+            <div className={`project-card rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+              <div 
+                className="h-48 bg-cover bg-center"
+                style={{ backgroundImage: "url('/Image/Screenshot 2025-11-09 135913.png')" }}
+              ></div>
+              <div className="p-6">
+                <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>E-Commerce Website</h3>
+                <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  A fully responsive online store with shopping cart functionality, product filters, and secure checkout process.
+                </p>
+                <div className="flex gap-2 flex-wrap mb-4">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">React</span>
+                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">CSS</span>
+                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">JavaScript</span>
+                </div>
+                <a 
+                  href="https://e-cpennys-projectsommerce.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-600 font-medium hover:text-blue-700"
+                >
+                  View Project →
+                </a>
+              </div>
+            </div>
 
-            {/* Project 2 */}
-            <div className="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div 
-  className="h-48 bg-cover bg-center"
-  style={{ backgroundImage: "url('/Image/screencapture-localhost-5173-2025-11-09-15_42_33.png')" }}
-></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Portfolio Website</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  A modern and sleek portfolio site featuring smooth animations, interactive elements, and mobile-first design.
-                </p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">React</span>
-                  <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">CSS</span>
-                  <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">JavaScript</span>
-                </div>
-                <button className="text-purple-600 font-medium hover:text-purple-700">View Project →</button>
-              </div>
-            </div>
-
+            {/* Project 2: Portfolio Website (Removed outer grid wrapper) */}
+            <div className={`project-card rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+              <div 
+                className="h-48 bg-cover bg-center"
+                style={{ backgroundImage: "url('/Image/screencapture-localhost-5173-2025-11-09-15_42_33.png')" }}
+              ></div>
+              <div className="p-6">
+                <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Portfolio Website</h3>
+                <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  A modern and sleek portfolio site featuring smooth animations, interactive elements, and mobile-first design.
+                </p>
+                <div className="flex gap-2 flex-wrap mb-4">
+                  <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">React</span>
+                  <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">CSS</span>
+                  <span className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">JavaScript</span>
+                </div>
+                <button className="text-purple-600 font-medium hover:text-purple-700">View Project →</button>
+              </div>
+            </div>
             {/* Project 3 
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
@@ -563,79 +606,84 @@ export default function App() {
             </div>*/}
 
             {/* Project 6 */}
-            <div className="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div 
-  className="h-48 bg-cover bg-center"
-  style={{ backgroundImage: "url('/Image/screencapture-pennny-eng-github-io-Dry-Cleaning-app-project-DEMO-2025-11-09-13_48_15.png')" }}
-></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Landing Page</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  High-converting landing page with smooth scrolling, call-to-action buttons, and contact forms.
-                </p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  <span className="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">HTML</span>
-                  <span className="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">CSS</span>
-                  <span className="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">JavaScript</span>
-                </div>
-               <a 
-  href="https://pennny-eng.github.io/Dry-Cleaning-app-project-DEMO-/" 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="text-blue-600 font-medium hover:text-blue-700"
+           <div className={`project-card rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+              <div 
+                className="h-48 bg-cover bg-center"
+                style={{ backgroundImage: "url('/Image/screencapture-pennny-eng-github-io-Dry-Cleaning-app-project-DEMO-2025-11-09-13_48_15.png')" }}
+              ></div>
+              <div className="p-6">
+                <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Landing Page</h3>
+                <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  High-converting landing page with smooth scrolling, call-to-action buttons, and contact forms.
+                </p>
+                <div className="flex gap-2 flex-wrap mb-4">
+                  <span className="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">HTML</span>
+                  <span className="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">CSS</span>
+                  <span className="px-3 py-1 bg-cyan-100 text-cyan-600 text-xs rounded-full">JavaScript</span>
+                </div>
+               <a 
+  href="https://pennny-eng.github.io/Dry-Cleaning-app-project-DEMO-/" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-blue-600 font-medium hover:text-blue-700"
 >
-  View Project →
+  View Project →
 </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
      
-          <section id="contact" className="py-20 px-4 bg-white">
+          <section id="contact" data-animate
+        className={`py-20 px-4 transition-all duration-700 ${
+            visibleSections.has('contact') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
+        style={{ transitionDelay: '400ms' }}
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-3">Contact Me</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
-              Have a project in mind? Let's work together to bring your ideas to life
+            <h2 className={`text-4xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Contact Me</h2>
+            <p className={`max-w-2xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            Have a project in mind? Let,s work together to bring your ideas to life
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Info Cards */}
             <div className="lg:col-span-1 space-y-6">
-              {/* Phone */}
-              <div className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-blue-600 text-xl">📞</span>
-                </div>
-                <h3 className="font-bold text-gray-800 mb-2">Phone Number</h3>
-                <p className="text-gray-600 text-sm">+234 8144663199</p>
+              
+              {/* Phone - UPDATED for Dark Mode */}
+              <div className={`project-card rounded-lg p-6 text-center shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-blue-600 text-xl">📞</span>
+                  </div>
+                  <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Phone Number</h3>
+                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>+234 8144663199</p>
               </div>
 
-              {/* Email */}
-              <div className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+              {/* Email - UPDATED for Dark Mode */}
+              <div className={`rounded-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-blue-600 text-xl">✉️</span>
                 </div>
-                <h3 className="font-bold text-gray-800 mb-2">Email Address</h3>
-                <p className="text-gray-600 text-sm">mikailibrahim514@gmail.com</p>
+                <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Email Address</h3>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>mikailibrahim514@gmail.com</p>
               </div>
 
-              {/* Location */}
-              <div className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+              {/* Location - UPDATED for Dark Mode */}
+              <div className={`rounded-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-blue-600 text-xl">📍</span>
                 </div>
-                <h3 className="font-bold text-gray-800 mb-2">Address</h3>
-                <p className="text-gray-600 text-sm">Ibadan, Nigeria</p>
+                <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Address</h3>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Ibadan, Nigeria</p>
               </div>
             </div>
 
-            {/* Contact Form */}
-           <div className="lg:col-span-2 bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">Send Message</h3>
+            {/* Contact Form - UPDATED for Dark Mode */}
+            <div className={`lg:col-span-2 p-8 rounded-lg ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+              <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Send Message</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
@@ -645,7 +693,7 @@ export default function App() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-colors"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-600 transition-colors ${darkMode ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-500' : 'bg-white text-gray-800 border-gray-300'}`}
                   />
                   <input
                     type="email"
@@ -654,7 +702,7 @@ export default function App() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-colors"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-600 transition-colors ${darkMode ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-500' : 'bg-white text-gray-800 border-gray-300'}`}
                   />
                 </div>
                 <input
@@ -664,7 +712,7 @@ export default function App() {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-colors"
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-600 transition-colors ${darkMode ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-500' : 'bg-white text-gray-800 border-gray-300'}`}
                 />
                 <textarea
                   name="message"
@@ -673,7 +721,7 @@ export default function App() {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-colors resize-none"
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-600 transition-colors resize-none ${darkMode ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-500' : 'bg-white text-gray-800 border-gray-300'}`}
                 ></textarea>
                 <button 
                   type="submit"
