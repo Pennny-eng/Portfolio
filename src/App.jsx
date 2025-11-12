@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Moon, Sun, Github, Linkedin, Mail, Code, Briefcase, User, MessageCircle } from 'lucide-react';
+import { Moon, Sun, Github, Linkedin, Mail, Code, Briefcase, User, MessageCircle, Check, Zap, Star, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -99,6 +99,86 @@ useEffect(() => {
    const whatsappNumber = "2348144663199";
   const whatsappMessage = "Hello! I'm interested in discussing a project with you.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+ 
+  
+
+  const pricingPlans = [
+    {
+      name: "Starter",
+      icon: Zap,
+      price: "₦120,000",
+      period: "per project",
+      description: "For small projects and landing pages",
+      features: [
+        "Single page website",
+        "Responsive design",
+        "Free domain name (1 year)",
+        "Free hosting (1 year)",
+        "Basic SEO optimization",
+        "1 week delivery",
+        "2 revisions",
+        "Source code included"
+      ],
+      buttonText: "Get Started",
+      popular: false,
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      name: "Professional",
+      icon: Star,
+      price: "₦280,000",
+      period: "per project",
+      description: "Ideal for medium-sized web applications",
+      features: [
+        "Up to 5 pages",
+        "Fully responsive design",
+        "Advanced animations",
+        "Free domain name (1 year)",
+        "Premium hosting (1 year)",
+        "SEO & performance optimization",
+        "2 weeks delivery",
+        "5 revisions",
+        "CMS integration",
+        "Source code & documentation"
+      ],
+      buttonText: "Get Started",
+      popular: true,
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      name: "Enterprise",
+      icon: Sparkles,
+      price: "₦600,000+",
+      period: "per project",
+      description: "Complete solutions for complex applications",
+      features: [
+        "Unlimited pages",
+        "Free domain name (1 year)",
+        "Premium hosting (1 year)",
+        "Custom animations & interactions",
+       
+       
+        "Advanced SEO strategy",
+        "Flexible timeline",
+        "Unlimited revisions",
+        "Priority support",
+        "Ongoing maintenance available"
+      ],
+      buttonText: "Get Started",
+      popular: false,
+      gradient: "from-orange-500 to-red-500"
+    }
+  ];
+
+  const handleGetStarted = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+ 
+      
   return (
      
 
@@ -351,6 +431,100 @@ useEffect(() => {
           </div>
         </div>
     </section>
+    <section   
+  id="education" 
+  data-animate
+  className={`py-20 px-4 transition-all duration-700 ${
+    visibleSections.has('education') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+  } ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
+  style={{ transitionDelay: '300ms' }}
+>
+  <div className="max-w-6xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className={`text-3xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Education</h2>
+      <h2 className={`text-4xl mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>My Academic Background</h2>
+      <p className={`max-w-2xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+        Building a strong foundation through quality education
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {/* University of Ibadan */}
+      <div className={`p-8 rounded-lg ${darkMode ? 'bg-gray-900' : 'bg-white'} shadow-lg`}>
+        <div className="flex flex-col sm:flex-row items-start gap-6">
+          {/* University of Ibadan Logo */}
+          <div className="flex-shrink-0 mx-auto sm:mx-0">
+            <img 
+              src="https://i.postimg.cc/zvrRW3K0/download.jpg" 
+              alt="University of Ibadan" 
+              className="w-20 h-20 object-contain"
+            />
+          </div>
+          
+          {/* Education Details */}
+          <div className="flex-grow text-center sm:text-left">
+            <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              University of Ibadan
+            </h3>
+            <p className={`text-lg mb-2 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+              Bachelor of Science in Computer Science
+            </p>
+            <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              2024 - 2028
+            </p>
+            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              Focused on software development, algorithms, and web technologies. 
+              Engaged in various projects and internships to apply theoretical knowledge in practical scenarios.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* freeCodeCamp */}
+     <div className={`p-8 rounded-lg ${darkMode ? 'bg-gray-900' : 'bg-white'} shadow-lg`}>
+  <div className="flex flex-col sm:flex-row items-start gap-6">
+    {/* freeCodeCamp Logo */}
+    <div className="flex-shrink-0 mx-auto sm:mx-0">
+      <img 
+        src="https://design-style-guide.freecodecamp.org/downloads/fcc_primary_large.jpg" 
+        alt="freeCodeCamp" 
+        className="w-20 h-20 object-contain"
+      />
+    </div>
+    
+    {/* Education Details */}
+    <div className="flex-grow text-center sm:text-left">
+      <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+        freeCodeCamp
+      </h3>
+      <p className={`text-lg mb-2 ${darkMode ? 'text-green-400' : 'text-green-600'}`}>
+        Certified Full Stack Developer
+      </p>
+      
+      {/* Option 4: Animated Badge */}
+      <div className="mb-4 flex items-center gap-3 justify-center sm:justify-start flex-wrap">
+        <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-gradient-to-r from-green-900 to-green-800 text-green-300' : 'bg-gradient-to-r from-green-50 to-green-100 text-green-700'} flex items-center gap-2 shadow-sm`}>
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          </span>
+          Actively Learning
+        </span>
+        <span className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          4/10 Certifications Complete
+        </span>
+      </div>
+      
+      <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+        Earning professional certifications in responsive web design, JavaScript algorithms, 
+        front-end development, back-end development, and APIs.
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+  </div>
+</section>
           <section   id="services" 
         data-animate
         className={`py-20 px-4 transition-all duration-700 ${
@@ -484,7 +658,109 @@ useEffect(() => {
           </div>
         </div>
       </section>
-    {/* Project 6 */}
+   <section
+        id="pricing"
+        data-animate
+        className={`py-20 px-4 transition-all duration-700 ${
+          visibleSections.has('pricing') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+        style={{ transitionDelay: '300ms' }}
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              Pricing Plans
+            </h2>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent`}>
+              Choose Your Perfect Plan
+            </h2>
+            <p className={`max-w-2xl mx-auto text-lg ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              Transparent pricing with no hidden fees. All plans include modern, responsive design and clean code.
+            </p>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6">
+            {pricingPlans.map((plan, index) => {
+              const Icon = plan.icon;
+              return (
+                <div
+                  key={index}
+                  className={`relative rounded-2xl transition-all duration-300 hover:scale-105 ${
+                    plan.popular 
+                      ? `${darkMode ? 'bg-gradient-to-br from-purple-900 to-pink-900' : 'bg-gradient-to-br from-purple-50 to-pink-50'} ring-2 ring-purple-500` 
+                      : `${darkMode ? 'bg-gray-800' : 'bg-white'}`
+                  } shadow-xl hover:shadow-2xl p-8`}
+                >
+                  {/* Popular Badge */}
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                        ⭐ Most Popular
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Icon */}
+                  <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${plan.gradient} mb-6`}>
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+
+                  {/* Plan Name */}
+                  <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                    {plan.name}
+                  </h3>
+
+                  {/* Price */}
+                  <div className="mb-4">
+                    <span className={`text-5xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                      {plan.price}
+                    </span>
+                    <span className={`text-lg ml-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {plan.period}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className={`mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    {plan.description}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start gap-3">
+                        <div className={`flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-r ${plan.gradient} flex items-center justify-center mt-0.5`}>
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                        <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA Button */}
+                  <button
+                    onClick={handleGetStarted}
+                    className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
+                      plan.popular
+                        ? `bg-gradient-to-r ${plan.gradient} text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1`
+                        : `${darkMode ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}`
+                    }`}
+                  >
+                    {plan.buttonText}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+         
+        </div>
+      </section>
+
            <section id="projects" 
         data-animate
         className={`py-20 px-4 transition-all duration-700 ${
