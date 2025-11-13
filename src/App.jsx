@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Moon, Sun, Github, Linkedin, Mail, Code, Briefcase, User, MessageCircle, Check, Zap, Star, Sparkles } from 'lucide-react';
+import { Moon, Sun, Github, Linkedin, Mail, Code, Briefcase, User, MessageCircle, Check, Zap, Star, Sparkles, MapPin, Phone} from 'lucide-react';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -59,7 +59,7 @@ useEffect(() => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Replace with your actual EmailJS credentials
+   
     const SERVICE_ID = 'service_tthlhj7';
     const TEMPLATE_ID = 'template_tfo8tlc';
     const PUBLIC_KEY = 'ja0N9tz63i6uaexBl';
@@ -278,14 +278,13 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* Overlay */}
         {isMenuOpen && (
           <div
             onClick={closeMenu}
             className="fixed inset-0 bg-black/50 z-30 md:hidden"
           ></div>
         )}
-    {/* Hero Content */}
+  
     <div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center">
       <h2 className="text-5xl font-bold mb-4">I'm <span className="font-display text-2xl text-blue-600">Penny</span> frontEnd Developer</h2>
       <p className="text-lg text-gray-200 max-w-xl animate-fade-in-up animation-delay-200">
@@ -383,7 +382,7 @@ useEffect(() => {
       `}</style>
 
 
-      {/* About Me*/}
+      {/*My About Section*/}
      <section  id="about" 
         data-animate
         className={`py-20 transition-all duration-700 ${
@@ -449,10 +448,10 @@ useEffect(() => {
     </div>
 
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      {/* University of Ibadan */}
+    
       <div className={`p-8 rounded-lg ${darkMode ? 'bg-gray-900' : 'bg-white'} shadow-lg`}>
         <div className="flex flex-col sm:flex-row items-start gap-6">
-          {/* University of Ibadan Logo */}
+         
           <div className="flex-shrink-0 mx-auto sm:mx-0">
             <img 
               src="https://i.postimg.cc/zvrRW3K0/download.jpg" 
@@ -461,7 +460,7 @@ useEffect(() => {
             />
           </div>
           
-          {/* Education Details */}
+          {/* My Education Details */}
           <div className="flex-grow text-center sm:text-left">
             <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
               University of Ibadan
@@ -480,10 +479,10 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* freeCodeCamp */}
+     
      <div className={`p-8 rounded-lg ${darkMode ? 'bg-gray-900' : 'bg-white'} shadow-lg`}>
   <div className="flex flex-col sm:flex-row items-start gap-6">
-    {/* freeCodeCamp Logo */}
+   
     <div className="flex-shrink-0 mx-auto sm:mx-0">
       <img 
         src="https://design-style-guide.freecodecamp.org/downloads/fcc_primary_large.jpg" 
@@ -492,7 +491,7 @@ useEffect(() => {
       />
     </div>
     
-    {/* Education Details */}
+    {/*My Education Details */}
     <div className="flex-grow text-center sm:text-left">
       <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
         freeCodeCamp
@@ -501,7 +500,7 @@ useEffect(() => {
         Certified Full Stack Developer
       </p>
       
-      {/* Option 4: Animated Badge */}
+     
       <div className="mb-4 flex items-center gap-3 justify-center sm:justify-start flex-wrap">
         <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-gradient-to-r from-green-900 to-green-800 text-green-300' : 'bg-gradient-to-r from-green-50 to-green-100 text-green-700'} flex items-center gap-2 shadow-sm`}>
           <span className="relative flex h-2.5 w-2.5">
@@ -680,7 +679,7 @@ useEffect(() => {
             </p>
           </div>
 
-          {/* Pricing Cards */}
+          {/*My Pricing Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6">
             {pricingPlans.map((plan, index) => {
               const Icon = plan.icon;
@@ -693,7 +692,7 @@ useEffect(() => {
                       : `${darkMode ? 'bg-gray-800' : 'bg-white'}`
                   } shadow-xl hover:shadow-2xl p-8`}
                 >
-                  {/* Popular Badge */}
+                 
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                       <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
@@ -702,17 +701,17 @@ useEffect(() => {
                     </div>
                   )}
 
-                  {/* Icon */}
+                 
                   <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${plan.gradient} mb-6`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
 
-                  {/* Plan Name */}
+                  
                   <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                     {plan.name}
                   </h3>
 
-                  {/* Price */}
+                  
                   <div className="mb-4">
                     <span className={`text-5xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                       {plan.price}
@@ -722,12 +721,12 @@ useEffect(() => {
                     </span>
                   </div>
 
-                  {/* Description */}
+                  
                   <p className={`mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     {plan.description}
                   </p>
 
-                  {/* Features */}
+                  
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-3">
@@ -741,7 +740,7 @@ useEffect(() => {
                     ))}
                   </ul>
 
-                  {/* CTA Button */}
+                  
                   <button
                     onClick={handleGetStarted}
                     className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
@@ -804,7 +803,7 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* Project 2: Portfolio Website (Removed outer grid wrapper) */}
+            {/* Project 2: Portfolio Website */}
             <div className={`project-card rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
               <div 
                 className="h-48 bg-cover bg-center"
@@ -921,7 +920,7 @@ useEffect(() => {
           <div className="text-center mb-16">
             <h2 className={`text-4xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Contact Me</h2>
             <p className={`max-w-2xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-            Have a project in mind? Let,s work together to bring your ideas to life
+            Have a project in mind? Let's work together to bring your ideas to life
             </p>
           </div>
 
@@ -929,35 +928,34 @@ useEffect(() => {
             {/* Contact Info Cards */}
             <div className="lg:col-span-1 space-y-6">
               
-              {/* Phone - UPDATED for Dark Mode */}
-              <div className={`project-card rounded-lg p-6 text-center shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-blue-600 text-xl">📞</span>
-                  </div>
-                  <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Phone Number</h3>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>+234 8144663199</p>
-              </div>
+             
+             <div className={`project-card rounded-lg p-6 text-center shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+    <Phone className="text-blue-600" size={20} />
+  </div>
+  <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Phone Number</h3>
+  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>+234 8144663199</p>
+</div>
 
-              {/* Email - UPDATED for Dark Mode */}
-              <div className={`rounded-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-blue-600 text-xl">✉️</span>
-                </div>
-                <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Email Address</h3>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>mikailibrahim514@gmail.com</p>
-              </div>
 
-              {/* Location - UPDATED for Dark Mode */}
-              <div className={`rounded-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-blue-600 text-xl">📍</span>
-                </div>
-                <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Address</h3>
-                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Ibadan, Nigeria</p>
-              </div>
-            </div>
+<div className={`rounded-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+    <Mail className="text-blue-600" size={20} />
+  </div>
+  <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Email Address</h3>
+  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>mikailibrahim514@gmail.com</p>
+</div>
 
-            {/* Contact Form - UPDATED for Dark Mode */}
+
+<div className={`rounded-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+    <MapPin className="text-blue-600" size={20} />
+  </div>
+  <h3 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Address</h3>
+  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Ibadan, Nigeria</p>
+</div>
+</div>
+           
             <div className={`lg:col-span-2 p-8 rounded-lg ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
               <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Send Message</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
